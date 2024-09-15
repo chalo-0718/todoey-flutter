@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:todoey_flutter/constants.dart';
-import 'package:todoey_flutter/widgets/task_tile.dart';
+import 'package:todoey_flutter/widgets/tasks_list.dart';
+import 'package:todoey_flutter/screens/add_task_screen.dart';
 
 class TasksScreen extends StatefulWidget {
   const TasksScreen({super.key});
-
   @override
   State<TasksScreen> createState() => _TasksScreenState();
 }
 
 class _TasksScreenState extends State<TasksScreen> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent,
       floatingActionButton: FloatingActionButton(
-        onPressed: null,
+        onPressed: () {
+          showModalBottomSheet(context: context, builder: (context) => AddTaskScreen());
+        },
         elevation: 10.0,
         backgroundColor: Colors.lightBlueAccent,
         child: kFloatingIcon,
@@ -57,12 +57,7 @@ class _TasksScreenState extends State<TasksScreen> {
           Expanded(
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: ListView(
-                children: [
-                  TaskTile(TaskTileText: 'The widget tree',),
-                  TaskTile(TaskTileText: 'From canva',),
-                ],
-              ),
+              child: TaskList(),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -77,5 +72,3 @@ class _TasksScreenState extends State<TasksScreen> {
     );
   }
 }
-
-

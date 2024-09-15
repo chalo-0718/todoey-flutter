@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Task tile widget.
 class TaskTile extends StatefulWidget {
   TaskTile({required this.TaskTileText});
   final String TaskTileText;
@@ -9,14 +10,14 @@ class TaskTile extends StatefulWidget {
 }
 
 class _TaskTileState extends State<TaskTile> {
-
-  bool _isChecked = false;
-
-  void _toggleCheckbox(bool? value) {
+  bool? isChecked = true;
+  
+  void checkBoxCallBack(bool? value){
     setState(() {
-      _isChecked = value ?? false;
+      isChecked = value ?? false;
     });
   }
+
 
   @override
   void initState() {
@@ -29,11 +30,27 @@ class _TaskTileState extends State<TaskTile> {
     return ListTile(
       title: Text(
         widget.TaskTileText,
+        style: TextStyle(
+          decoration: isChecked! ? TextDecoration.lineThrough : null,
+        ),
       ),
-      trailing: Checkbox(
-        value: _isChecked,
-        onChanged: _toggleCheckbox,
-      ),
+      trailing: checkBox(isChecked: isChecked, checkBoxStateToggler: checkBoxCallBack),
+    );
+  }
+}
+
+// checkBox widget.
+class checkBox extends StatelessWidget {
+  final bool? isChecked;
+  final Function(bool?) checkBoxStateToggler;
+
+  checkBox({required this.isChecked, required this.checkBoxStateToggler});
+
+  @override
+  Widget build(BuildContext context) {
+    return Checkbox(
+      value: isChecked,
+      onChanged: checkBoxStateToggler,
     );
   }
 }
