@@ -1,10 +1,10 @@
 class Task {
-  final String name;
+  final String taskTitle;
   bool isDone;
 
-  Task({this.name, this.isDone = false});
+  Task({required this.taskTitle, this.isDone = false});
 
-  void toggleDone() {
+  void taskToggle() {
     isDone = !isDone;
   }
 }
